@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+* {
+  font-family: "Aleo", sans-serif;
+}
+
+img {
+  image-rendering: pixelated;
+}
