@@ -1,16 +1,18 @@
 import index from "./index.html";
+import tagger from "./tagger.html";
 import { mkdir } from "node:fs/promises";
 
 const server = Bun.serve({
   routes: {
     "/": index,
+    "/tagger": tagger,
     "/makejson/:wad": async (req) => {
       const glob = new Bun.Glob(`files/${req.params.wad}/*.png`);
       let text = "{\n";
 
       Array.from(glob.scanSync()).forEach((v, i, a) => {
         if (i === a.length - 1) text += `  "${v.replace(`files\\${req.params.wad}\\`, "")}": []\n}`;
-        else text += `  "${v.replace("files\\", "")}": [],\n`;
+        else text += `  "${v.replace(`files\\${req.params.wad}\\`, "")}": [],\n`;
       });
 
       await Bun.write(`files/${req.params.wad}.json`, text);
