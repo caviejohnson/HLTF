@@ -9,8 +9,10 @@ export default function TaggerApp({ files }: { files: string[] }) {
 
   return (
     <div className="w-screen bg-purple-100 grid grid-cols-3 h-screen">
-      <WadSelector />
-      <Images />
+      <div className="col-span-2">
+        <WadSelector />
+        <Images />
+      </div>
       <div className="min-h-screen py-3">
         <MoudleList wads={files} wad={wad} setWad={setWad} />
       </div>
