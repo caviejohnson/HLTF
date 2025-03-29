@@ -11,8 +11,10 @@ const server = Bun.serve({
       let text = "{\n";
 
       Array.from(glob.scanSync()).forEach((v, i, a) => {
-        if (i === a.length - 1) text += `  "${v.replace(`files\\${req.params.wad}\\`, "")}": []\n}`;
-        else text += `  "${v.replace(`files\\${req.params.wad}\\`, "")}": [],\n`;
+        if (i === a.length - 1)
+          text += `  "${v.replace(`files\\${req.params.wad}\\`, "")}": []\n}`;
+        else
+          text += `  "${v.replace(`files\\${req.params.wad}\\`, "")}": [],\n`;
       });
 
       await Bun.write(`files/${req.params.wad}.json`, text);
@@ -48,6 +50,13 @@ const server = Bun.serve({
       await mkdir(`./files/${name}`);
 
       return new Response("Ok");
+    },
+    "/lookup/:wad/:perpage/:page": async (req) => {
+      const startIndex = Number(req.params.perpage) * Number(req.params.page);
+      const endIndex = startIndex + Number(req.params.page);
+
+      const file = await Bun.file(`./files/${req.params.wad}.json`).json();
+      return Response.json(Object.entries(file).splice(startIndex - Number(req.params.perpage), endIndex));
     },
   },
 
