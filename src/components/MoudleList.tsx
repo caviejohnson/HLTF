@@ -80,7 +80,6 @@ export default function MoudleList({
           <div
             className="w-full bg-purple-700 h-12 rounded-lg text-white flex justify-center items-center hover:bg-purple-800 cursor-pointer"
             onClick={() => {
-              console.log("hello");
               fetch(`./makejson/${wadRightNow}`);
             }}
           >
