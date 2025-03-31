@@ -56,7 +56,27 @@ const server = Bun.serve({
       const endIndex = startIndex + Number(req.params.page);
 
       const file = await Bun.file(`./files/${req.params.wad}.json`).json();
-      return Response.json(Object.entries(file).splice(startIndex - Number(req.params.perpage), endIndex));
+      return Response.json(
+        Object.entries(file).splice(
+          startIndex - Number(req.params.perpage),
+          endIndex
+        )
+      );
+    },
+    "/saveinfo/:wad/:perpage/:page": async (req) => {
+      const startIndex = Number(req.params.perpage) * Number(req.params.page);
+      const endIndex = startIndex + Number(req.params.page);
+
+      const data = await req.json();
+      const file = await Bun.file(`./files/${req.params.wad}.json`).json();
+
+      data.forEach((item: { image: string; tags: string[] }) => {
+        file[item.image] = item.tags;
+      });
+
+      await Bun.write(`./files/${req.params.wad}.json`, JSON.stringify(file, null, 2));
+
+      return new Response("Ok");
     },
   },
 
