@@ -1,6 +1,11 @@
 # Changelog
 
-All official production releases will be put here.
+All official production releases will be put here. This Project follows semantic versioning.
+
+## 0.1.1
+
+### Added
+- Added a close button for the automatic JSON prompt.
 
 ## 0.1.0
 

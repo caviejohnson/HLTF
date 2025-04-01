@@ -28,7 +28,7 @@ export default function MoudleList({
       <div className="flex p-3">
         <div
           className="bg-purple-700 size-12 rounded-lg text-white flex justify-center hover:bg-purple-800 cursor-pointer"
-          onClick={(e) => inputFile.current?.click()}
+          onClick={() => inputFile.current?.click()}
         >
           <span className="!text-5xl font-bold material-symbols-outlined select-none">
             add
@@ -73,15 +73,26 @@ export default function MoudleList({
         <div>
           You'll just need to decompile your wad file using WadMaker and put the
           pictures inside the{" "}
-          <code className="!font-mono">./files/{wadFile}</code> folder.
+          <code className="!font-mono">./files/{wadFile}</code> folder. After
+          that, you can click the button below:
         </div>
-        <div
-          className="mt-5 bg-purple-700 h-12 rounded-lg text-white flex justify-center items-center hover:bg-purple-800 cursor-pointer"
-          onClick={() => {console.log("hello"); fetch(`./makejson/${wadRightNow}`)}}
-        >
-          <span className="select-none">
-            Automatically Generate JSON
-          </span>
+        <div className="flex gap-3 mt-5">
+          <div
+            className="w-full bg-purple-700 h-12 rounded-lg text-white flex justify-center items-center hover:bg-purple-800 cursor-pointer"
+            onClick={() => {
+              fetch(`./makejson/${wadRightNow}`);
+            }}
+          >
+            <span className="select-none">Automatically Generate JSON</span>
+          </div>
+          <div
+            className="bg-purple-700 size-12 rounded-lg text-white flex justify-center hover:bg-purple-800 cursor-pointer"
+            onClick={() => setShowDialog(false)}
+          >
+            <span className="!text-5xl font-bold material-symbols-outlined select-none">
+              close
+            </span>
+          </div>
         </div>
       </div>
     </div>
