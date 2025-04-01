@@ -4,10 +4,12 @@ export default function Images({
   wad,
   images,
   setImages,
+  setIsChanging,
 }: {
   wad: string;
   images: Image[];
   setImages: React.Dispatch<React.SetStateAction<Image[]>>;
+  setIsChanging: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
     <div className="bg-purple-100 p-3">
@@ -25,7 +27,19 @@ export default function Images({
                 className="bg-purple-800 p-3 text-white rounded-lg hover:bg-purple-950 cursor-pointer h-12"
                 key={t}
                 onClick={() => {
-                  setImages(images.map((img): Image => img === v ? {image: v.image, tags: img.tags.filter((tag) => tag !== t), inputVisibile: false} : img))
+                  setImages(
+                    images.map(
+                      (img): Image =>
+                        img === v
+                          ? {
+                              image: v.image,
+                              tags: img.tags.filter((tag) => tag !== t),
+                              inputVisibile: false,
+                            }
+                          : img
+                    )
+                  );
+                  setIsChanging(true);
                 }}
               >
                 {t}
@@ -34,7 +48,8 @@ export default function Images({
             <div
               className="bg-purple-800 flex items-center text-white rounded-lg hover:bg-purple-950 cursor-pointer min-w-12 h-12"
               onClick={() => {
-                if (!v.inputVisibile)
+                if (!v.inputVisibile) {
+                  setIsChanging(true);
                   setImages(
                     images.map((img): Image => {
                       if (v.image === img.image)
@@ -46,6 +61,7 @@ export default function Images({
                       return img;
                     })
                   );
+                }
               }}
             >
               {v.inputVisibile ? (
@@ -53,7 +69,21 @@ export default function Images({
                   autoFocus
                   type="text"
                   className="text-black h-12 outline-0 bg-purple-300 rounded-lg p-3"
-                  onKeyDown={(e) => {if (e.key === "Enter") setImages(images.map((img): Image => img.image === v.image ? {image: v.image, tags: [...v.tags, e.currentTarget.value], inputVisibile: false} : img))}}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter")
+                      setImages(
+                        images.map(
+                          (img): Image =>
+                            img.image === v.image
+                              ? {
+                                  image: v.image,
+                                  tags: [...v.tags, e.currentTarget.value],
+                                  inputVisibile: false,
+                                }
+                              : img
+                        )
+                      );
+                  }}
                 />
               ) : (
                 <span className="text-center w-full material-symbols-outlined font-bold text-2xl !leading-none">

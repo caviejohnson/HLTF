@@ -33,13 +33,16 @@ export default function WadSelector({
         inputVisibile: false,
       }))
     );
+    setIsChanging(false);
   };
 
   return (
     <div className="bg-purple-200 m-3 rounded-2xl p-3 flex h-min">
       <div className="w-full">
         {isChanging ? (
-          <div className="bg-white text-red-950">You have unsaved changes!</div>
+          <div className="bg-white text-red-950 h-full rounded-lg p-3">
+            You have unsaved changes!
+          </div>
         ) : (
           <>
             <input
@@ -56,12 +59,13 @@ export default function WadSelector({
               className="bg-white p-2 outline-0 w-1/2 h-12 rounded-r-lg"
               placeholder="Texture per page"
               value={searchValues.per}
-              onChange={(e) =>
+              onChange={(e) => {
                 setSearchValues({
                   page: searchValues.page,
                   per: e.target.value,
-                })
-              }
+                });
+                setIsChanging(false);
+              }}
             />
           </>
         )}
