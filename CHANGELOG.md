@@ -34,9 +34,9 @@ This second version aims to be the first actually usable model of this tool.
 
 ### Removed
 
-- Removed the tagger tab due to it no longer working properly in the new UI rewrite
-- Removed previous Half-Life textures
-- Removed password protection of tagging and along it the .env file
+- The tagger tab due to it no longer working properly in the new UI rewrite
+- Previous Half-Life textures
+- Password protection of tagging and along it the .env file
 
 ## 0.0.1
 
