@@ -25,13 +25,22 @@ export default function MoudleList({
 
   return (
     <div className="bg-white h-full rounded-l-2xl border-2 border-r-0 border-purple-200">
-      <div className="flex p-3">
+      <div className="flex p-3 gap-3">
         <div
           className="bg-purple-700 size-12 rounded-lg text-white flex justify-center hover:bg-purple-800 cursor-pointer"
           onClick={() => inputFile.current?.click()}
         >
           <span className="!text-5xl font-bold material-symbols-outlined select-none">
             add
+          </span>
+        </div>
+
+        <div
+          className="bg-yellow-700 size-12 rounded-lg text-white flex justify-center items-center hover:bg-yellow-800 cursor-pointer"
+          onClick={() => window.location.href = window.location.href.endsWith("/tagger") ? "/" : "./tagger"}
+        >
+          <span className="!text-4xl font-bold material-symbols-outlined select-none">
+            sell
           </span>
         </div>
       </div>

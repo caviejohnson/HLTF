@@ -71,13 +71,13 @@ export default function Search({
           <div key={i}>
             {imgs.map((img) => (
               <div key={img} className="p-3 mx-3 rounded-lg bg-purple-200">
-                <img src={`img/${wad}/${img}.png`} className="w-full" />
+                <img src={`img/${wad}/${img}`} className="w-full" />
                 <div
                   className="flex pt-3 cursor-pointer"
                   title="Click to copy"
-                  onClick={() => navigator.clipboard.writeText(img)}
+                  onClick={() => navigator.clipboard.writeText(img.replace(".png", ""))}
                 >
-                  <div>{img}</div>
+                  <div>{img.replace(".png", "")}</div>
                   <div className="ml-auto material-symbols-outlined !font-bold hover:animate-[spin_1s_ease-in-out]">
                     content_copy
                   </div>
