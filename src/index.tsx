@@ -53,12 +53,12 @@ const server = Bun.serve({
     },
     "/lookup/:wad/:perpage/:page": async (req) => {
       const startIndex = Number(req.params.perpage) * Number(req.params.page);
-      const endIndex = startIndex + Number(req.params.page);
+      const endIndex = startIndex + Number(req.params.perpage);
 
       const file = await Bun.file(`./files/${req.params.wad}.json`).json();
       return Response.json(
-        Object.entries(file).splice(
-          startIndex - Number(req.params.perpage),
+        Object.entries(file).slice(
+          startIndex,
           endIndex
         )
       );

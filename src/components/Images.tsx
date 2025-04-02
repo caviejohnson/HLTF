@@ -1,4 +1,5 @@
 import { Image } from "@/TaggerApp";
+import { useRef } from "react";
 
 export default function Images({
   wad,
@@ -16,7 +17,9 @@ export default function Images({
       {images.map((v) => (
         <div className="flex gap-3 mb-3" key={v.image}>
           <div className="relative w-1/4 bg-purple-200 flex items-center rounded-lg">
-          <div className="absolute top-0 left-0 bg-black/50 text-white rounded-t-lg p-1 w-full">{v.image}</div>
+            <div className="absolute top-0 left-0 bg-black/50 text-white rounded-t-lg p-1 w-full">
+              {v.image}
+            </div>
             <img
               className="w-full rounded-lg"
               src={`./img/${wad}/${v.image}`}
@@ -71,7 +74,7 @@ export default function Images({
                   type="text"
                   className="text-black h-12 outline-0 bg-purple-300 rounded-lg p-3"
                   onKeyDown={(e) => {
-                    if (e.key === "Enter")
+                    if (e.key === "Enter") {
                       setImages(
                         images.map(
                           (img): Image =>
@@ -79,11 +82,27 @@ export default function Images({
                               ? {
                                   image: v.image,
                                   tags: [...v.tags, e.currentTarget.value],
-                                  inputVisibile: false,
+                                  inputVisibile: true,
                                 }
                               : img
                         )
                       );
+                      e.currentTarget.value = "";
+                    }
+                  }}
+                  onBlur={() => {
+                    setImages(
+                      images.map(
+                        (img): Image =>
+                          img.image === v.image
+                            ? {
+                                image: v.image,
+                                tags: v.tags,
+                                inputVisibile: false,
+                              }
+                            : img
+                      )
+                    );
                   }}
                 />
               ) : (
