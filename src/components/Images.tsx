@@ -15,7 +15,8 @@ export default function Images({
     <div className="bg-purple-100 p-3">
       {images.map((v) => (
         <div className="flex gap-3 mb-3" key={v.image}>
-          <div className="w-1/4 bg-purple-200 flex items-center rounded-lg">
+          <div className="relative w-1/4 bg-purple-200 flex items-center rounded-lg">
+          <div className="absolute top-0 left-0 bg-black/50 text-white rounded-t-lg p-1 w-full">{v.image}</div>
             <img
               className="w-full rounded-lg"
               src={`./img/${wad}/${v.image}`}
